@@ -19,4 +19,8 @@ Route::get('/', function () {
 
 Route::get('/login', function() {
     return view('auth.login');
-});
+})->name('login.form');
+
+Route::get('/register', function() {
+    return view('registration.register');
+})->name('registration.form');

@@ -11,29 +11,46 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-
+    <style>
+        .user-icon {
+            max-width: 50px;
+            height: auto; 
+        }
+        .login-text {
+            margin-top: 10px;
+        }
+    </style>
     
 </head>
 <body>
     <div class="container">
-        <div class="row justify-content-center mt-5">
+        <div class="row justify-content-center mt-5 mb-5">
             <div class="col-md-6">
+                <img src="{{ asset('assets/images/user-icon.png') }}" alt="User Icon" class="user-icon d-block mx-auto"> <!-- User Icon -->
+                <h5 class="text-center mt-2 mb-4">Login</h3>
                 <div class="card">
-                    <div class="card-header">
-                        Login
-                    </div>
                     <div class="card-body">
-                        <form action="{{ route('login') }}" method="POST">
+                        <form action="#" method="POST">
                             @csrf
                             <div class="form-group">
                                 <label for="email">Email address</label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
+                                <input type="email" class="form-control mt-1" id="email" name="email" placeholder="Enter email">
                             </div>
-                            <div class="form-group">
+                            <div class="form-group mt-3">
                                 <label for="password">Password</label>
                                 <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                             </div>
-                            <button type="submit" class="btn btn-primary">Login</button>
+                            <div class="form-group d-flex justify-content-center mt-3">
+                                <button type="submit" class="btn btn-dark btn-sm">Login</button>
+                            </div>
+
+                            <div class="form group mt-3">
+                                <label>
+                                    Don't have an account? <a href="{{route('registration.form')}}">Sign up</a>
+                                </label>
+
+                            </div>
+
                         </form>
                     </div>
                 </div>
