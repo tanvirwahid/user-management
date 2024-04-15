@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\RegistrationController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\SessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,12 +17,19 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware('auth');
 
-Route::get('/login', function () {
-    return view('auth.login');
-})->name('login.form');
 
-Route::get('/register', [RegistrationController::class, 'create'])->name('registration.form');
-Route::post('/register', [RegistrationController::class, 'store'])->name('register');
-Route::get('check-email', [RegistrationController::class, 'checkIfEmailExists']);
+Route::group(
+    [
+        'middleware' => 'guest'
+    ],
+    function () {
+        Route::get('/register', [RegistrationController::class, 'create'])->name('registration.form');
+        Route::post('/register', [RegistrationController::class, 'store'])->name('register');
+        Route::get('check-email', [RegistrationController::class, 'checkIfEmailExists']);
+        
+        Route::get('/login', [SessionController::class, 'showLoginPage'])->name('login.form');
+        Route::post('/login', [SessionController::class, 'login'])->name('login');
+    }
+);

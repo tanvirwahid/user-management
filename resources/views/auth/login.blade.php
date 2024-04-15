@@ -39,7 +39,7 @@
                                     {{ request()->get('success') }}
                                 </div>
                             @endif
-                            <form action="#" method="POST">
+                            <form action="{{route('login')}}" method="POST">
                                 @csrf
                                 <div class="form-group">
                                     <label for="email">Email address</label>
