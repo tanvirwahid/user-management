@@ -12,13 +12,20 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    const FILE_FOLDER = 'public/nid_documents';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
+        'phone',
+        'address',
+        'date_of_birth',
+        'id_verification_document_path',
         'email',
         'password',
     ];
