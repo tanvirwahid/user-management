@@ -17,10 +17,6 @@
             max-width: 50px;
             height: auto;
         }
-
-        .login-text {
-            margin-top: 10px;
-        }
     </style>
 
 </head>
@@ -30,7 +26,6 @@
         <div class="row justify-content-center mt-5 mb-5">
             <div class="col-md-6">
                 <img src="{{ asset('assets/images/user-icon.png') }}" alt="User Icon" class="user-icon d-block mx-auto">
-                <!-- User Icon -->
                 <h5 class="text-center mt-2 mb-4">Login</h3>
                     <div class="card">
                         <div class="card-body">
@@ -39,7 +34,13 @@
                                     {{ request()->get('success') }}
                                 </div>
                             @endif
-                            <form action="{{route('login')}}" method="POST">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    {{ $errors->first('email') }}
+                                </div>
+                            @endif
+
+                            <form action="{{ route('login') }}" method="POST">
                                 @csrf
                                 <div class="form-group">
                                     <label for="email">Email address</label>

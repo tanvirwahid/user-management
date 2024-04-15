@@ -31,7 +31,7 @@
             <div class="col-md-4">
                 <img src="{{ asset('assets/images/user-icon.png') }}" alt="User Icon" class="user-icon d-block mx-auto">
                 <!-- User Icon -->
-                <h5 class="text-center mt-2 mb-4">Register Your Account</h3>
+                <h5 class="text-center mt-2 mb-4">Register Your Account</h5>
                     <div class="card">
                         <div class="card-body">
                             <form action="{{ route('register') }}" method="POST" enctype="multipart/form-data">
