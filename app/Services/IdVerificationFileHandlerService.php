@@ -4,6 +4,8 @@ namespace App\Services;
 
 use App\Contracts\FileHandlerInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class IdVerificationFileHandlerService implements FileHandlerInterface
 {
@@ -14,5 +16,12 @@ class IdVerificationFileHandlerService implements FileHandlerInterface
         $file->storeAs($location, $fileName);
 
         return $fileName;
+    }
+
+    public function download(string $fileName, string $location): BinaryFileResponse
+    {
+        $path = storage_path('app/'.$location . '/' . $fileName);
+
+        return response()->download($path, $fileName);
     }
 }

@@ -28,7 +28,7 @@ class SessionController extends Controller
         if (Auth::attempt($credentials)) {
             $this->sendVerificationCode();
 
-            return redirect(route('login.form'));
+            return redirect(route('verify.index'));
         }
 
         return back()->withErrors([

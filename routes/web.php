@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\SessionController;
 use App\Http\Controllers\Auth\TwofaVerificationController;
 use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/', function () {
+   return redirect(route('login'));                 
+});
 
 Route::group(
     [
@@ -54,9 +59,17 @@ Route::group(
                 Route::post('/verify', [TwofaVerificationController::class, 'verify'])->name('verify.login');
                 Route::get('/verify/resend', [TwofaVerificationController::class, 'resend'])->name('verify.resend');
 
-                Route::get('/', function () {
-                    return view('welcome');
-                });
+                Route::group(
+                    [
+                        'prefix' => '/profile',
+                        'as' => 'profile.'
+                    ], function() {
+                        Route::get('', [ProfileController::class, 'show'])->name('index');
+                        Route::get('/download', [ProfileController::class, 'downloadNidDocument'])->name('download');
+                    }
+                );
+
+                
             }
         );
     }
