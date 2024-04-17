@@ -30,7 +30,7 @@ MAIL_ENCRYPTION=tls
 MAIL_FROM_ADDRESS=YOUR_EMAIL_ADDRESS
 MAIL_FROM_NAME="Bit Mascot"
 
-* Run 'php artisan migrate', then 'php artisan db:seed', 'php artisan key:generate' and then 'php artisan serve'
+* Run 'php artisan migrate', then 'php artisan db:seed', 'php artisan key:generate', 'php artisan storage:link' and then 'php artisan serve'
 * Open another terminal and run 'npm install && npm run dev'
 * Open another terminal and run 'php artisan queue:work'
 * Open browser and go to localhost:8000
