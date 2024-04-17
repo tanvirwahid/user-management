@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PasswordUpdateRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class PasswordResetController extends Controller
@@ -14,13 +14,8 @@ class PasswordResetController extends Controller
         return view('auth.password-reset');
     }
 
-    public function update(Request $request)
+    public function update(PasswordUpdateRequest $request)
     {
-        $request->validate([
-            'old_password' => 'required',
-            'new_password' => 'required|confirmed',
-        ]);
-
         $authenticatedUser = auth()->user();
 
         if (! Hash::check($request->get('old_password'), $authenticatedUser->password)) {

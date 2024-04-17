@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\Auth\SessionController;
-use App\Http\Controllers\Auth\TwofaVerificationController;
+use App\Http\Controllers\Auth\TwoFaVerificationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\UserController;
@@ -56,9 +56,9 @@ Route::group(
                     ->name('logout');
 
                 ///2fa
-                Route::get('/verify', [TwofaVerificationController::class, 'index'])->name('verify.index');
-                Route::post('/verify', [TwofaVerificationController::class, 'verify'])->name('verify.login');
-                Route::get('/verify/resend', [TwofaVerificationController::class, 'resend'])->name('verify.resend');
+                Route::get('/verify', [TwoFaVerificationController::class, 'index'])->name('verify.index');
+                Route::post('/verify', [TwoFaVerificationController::class, 'verify'])->name('verify.login');
+                Route::get('/verify/resend', [TwoFaVerificationController::class, 'resend'])->name('verify.resend');
 
                 Route::group([
                     'middleware' => [

@@ -3,22 +3,18 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TwoFaVerificationRequest;
 use App\Notifications\TwoFactorNotification;
-use Illuminate\Http\Request;
 
-class TwofaVerificationController extends Controller
+class TwoFaVerificationController extends Controller
 {
     public function index()
     {
         return view('auth.two-factor');
     }
 
-    public function verify(Request $request)
+    public function verify(TwoFaVerificationRequest $request)
     {
-        $request->validate([
-            'code' => 'required',
-        ]);
-
         $user = auth()->user();
 
         if ($request->input('code') == $user->two_factor_code) {
