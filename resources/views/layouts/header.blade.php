@@ -9,8 +9,7 @@
                     {{ Auth::user()->first_name }}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="{{route('password-reset.index')}}">Change Password</a>
                     <div class="dropdown-divider"></div>
                     <div class="dropdown-item">
                         <form action="{{ route('logout') }}" method="POST">

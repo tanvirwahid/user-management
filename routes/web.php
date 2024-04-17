@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\SessionController;
 use App\Http\Controllers\Auth\TwofaVerificationController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Auth\PasswordResetController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-   return redirect(route('login'));                 
+    return redirect(route('login'));
 });
 
 Route::group(
@@ -63,13 +64,23 @@ Route::group(
                     [
                         'prefix' => '/profile',
                         'as' => 'profile.'
-                    ], function() {
+                    ],
+                    function () {
                         Route::get('', [ProfileController::class, 'show'])->name('index');
                         Route::get('/download', [ProfileController::class, 'downloadNidDocument'])->name('download');
                     }
                 );
 
-                
+                Route::group(
+                    [
+                        'prefix' => '/password-reset',
+                        'as' => 'password-reset.'
+                    ],
+                    function () {
+                        Route::get('', [PasswordResetController::class, 'index'])->name('index');
+                        Route::post('', [PasswordResetController::class, 'update'])->name('update');
+                    }
+                );
             }
         );
     }

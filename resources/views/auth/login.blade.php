@@ -26,8 +26,8 @@
         <div class="row justify-content-center mt-5 mb-5">
             <div class="col-md-6">
                 <img src="{{ asset('assets/images/user-icon.png') }}" alt="User Icon" class="user-icon d-block mx-auto">
-                <h5 class="text-center mt-2 mb-4">Login</h3>
-                    <div class="card">
+                <h4 class="text-center mt-2 mb-4">Login</h4>
+                    <div class="card ">
                         <div class="card-body">
                             @if (request()->has('success'))
                                 <div class="alert alert-success">
