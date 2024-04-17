@@ -16,6 +16,12 @@ class DatabaseSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
         $this->call(RoleSeeder::class);
         $this->call(AdminSeeder::class);
+
+        if(config('app.env') == 'local')
+        {
+            $this->call(UserSeeder::class);
+        }
+
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }
 }
