@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\CreateAction;
-use App\Contracts\FileHandlerInterface;
 use App\Http\Requests\UserCreationRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -12,7 +11,6 @@ use Illuminate\View\View;
 class RegistrationController extends Controller
 {
     public function __construct(
-        private FileHandlerInterface $fileHandler,
         private CreateAction $createAction
     ) {
     }
