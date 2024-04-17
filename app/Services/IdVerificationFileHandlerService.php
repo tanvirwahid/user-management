@@ -5,10 +5,9 @@ namespace App\Services;
 use App\Contracts\FileDownloaderInterface;
 use App\Contracts\FileHandlerInterface;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
-class IdVerificationFileHandlerService implements FileHandlerInterface, FileDownloaderInterface
+class IdVerificationFileHandlerService implements FileDownloaderInterface, FileHandlerInterface
 {
     public function getFileName(Request $request, string $fileColumn, string $location): string
     {
@@ -21,7 +20,7 @@ class IdVerificationFileHandlerService implements FileHandlerInterface, FileDown
 
     public function download(string $fileName, string $location): BinaryFileResponse
     {
-        $path = storage_path('app/'.$location . '/' . $fileName);
+        $path = storage_path('app/'.$location.'/'.$fileName);
 
         return response()->download($path, $fileName);
     }

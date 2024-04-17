@@ -6,6 +6,6 @@ trait RoleCheckerTrait
 {
     public function hasRole(string $role): bool
     {
-        return (auth()->check() && auth()->user()->roles->where('name', $role)->count() > 0);
+        return auth()->check() && auth()->user()->roles->where('name', $role)->count() > 0;
     }
 }

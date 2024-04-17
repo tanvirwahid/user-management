@@ -18,7 +18,7 @@ class TwoFactor
         $user = auth()->user();
 
         if (auth()->check() && $user->two_factor_code) {
-          
+
             if ($user->two_factor_expires_at < now()) {
                 $user->resetTwoFactorCode();
                 auth()->logout();
@@ -29,8 +29,7 @@ class TwoFactor
             if (! $request->is('verify*')) {
                 return redirect(route('verify.index'));
             }
-        } else if(auth()->check() && $request->is('verify*'))
-        {
+        } elseif (auth()->check() && $request->is('verify*')) {
             return redirect('/');
         }
 

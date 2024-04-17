@@ -26,7 +26,7 @@ class RedirectIfAuthenticated
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
                 return redirect(
-                    $this->hasRole(Role::ROLE_ADMIN) ? 
+                    $this->hasRole(Role::ROLE_ADMIN) ?
                     RouteServiceProvider::ADMIN_HOME : RouteServiceProvider::USER_HOME
                 );
             }

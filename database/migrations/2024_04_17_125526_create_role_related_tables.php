@@ -33,8 +33,8 @@ return new class extends Migration
                 ->onDelete('cascade');
 
             Schema::table('users', function (Blueprint $table) {
-                    $table->dropColumn('is_admin');
-                });
+                $table->dropColumn('is_admin');
+            });
 
             $table->timestamps();
         });

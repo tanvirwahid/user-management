@@ -33,8 +33,8 @@ class RegistrationController extends Controller
         $userRole = Role::where('name', Role::ROLE_USER)
             ->first();
 
-        DB::transaction(function() use ($request, $userRole, $fileName) {
-     
+        DB::transaction(function () use ($request, $userRole, $fileName) {
+
             $user = User::create([
                 'first_name' => $request->get('first_name'),
                 'last_name' => $request->get('last_name'),
@@ -47,7 +47,7 @@ class RegistrationController extends Controller
             ]);
 
             $user->roles()->attach($userRole->id);
-      
+
         });
 
         return redirect(route('login.form'))->with('success', 'User registered successfully');

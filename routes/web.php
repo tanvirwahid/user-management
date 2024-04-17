@@ -1,10 +1,10 @@
 <?php
 
+use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\Auth\SessionController;
 use App\Http\Controllers\Auth\TwofaVerificationController;
-use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Auth\PasswordResetController;
+use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,7 +37,6 @@ Route::group(
     }
 );
 
-
 Route::group(
     [
         'middleware' => ['auth'],
@@ -63,11 +62,11 @@ Route::group(
 
                 Route::group([
                     'middleware' => [
-                        'role:admin'
+                        'role:admin',
                     ],
                     'prefix' => '/admin',
-                    'as' => 'admin.'
-                ], function() {
+                    'as' => 'admin.',
+                ], function () {
                     Route::get('', [UserController::class, 'index'])->name('users');
                     Route::get('/download/{user}', [UserController::class, 'downloadIdVerificationDocument'])
                         ->name('download');
@@ -78,8 +77,8 @@ Route::group(
                         'prefix' => '/profile',
                         'as' => 'profile.',
                         'middleware' => [
-                            'role:user'
-                        ]
+                            'role:user',
+                        ],
                     ],
                     function () {
                         Route::get('', [ProfileController::class, 'show'])->name('index');
@@ -90,7 +89,7 @@ Route::group(
                 Route::group(
                     [
                         'prefix' => '/password-reset',
-                        'as' => 'password-reset.'
+                        'as' => 'password-reset.',
                     ],
                     function () {
                         Route::get('', [PasswordResetController::class, 'index'])->name('index');

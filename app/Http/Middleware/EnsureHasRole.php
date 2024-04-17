@@ -18,8 +18,7 @@ class EnsureHasRole
      */
     public function handle(Request $request, Closure $next, string $role): Response
     {
-        if(! $this->hasRole($role))
-        {
+        if (! $this->hasRole($role)) {
             abort(403);
         }
 

@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\Factories\FilterFactoryInterface;
 use App\Contracts\FileDownloaderInterface;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -26,10 +24,10 @@ class UserController extends Controller
                         'address' => $search,
                         'phone' => $search,
                         'email' => $search,
-                        'date_of_birth' => $search
+                        'date_of_birth' => $search,
                     ],
                 )->paginate(10),
-                'search' => $search
+                'search' => $search,
             ]);
     }
 
@@ -37,7 +35,7 @@ class UserController extends Controller
     {
         return $this->fileDownloader->download(
             $user->id_verification_document_path,
-            User::FILE_FOLDER    
+            User::FILE_FOLDER
         );
     }
 }

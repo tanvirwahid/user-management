@@ -18,13 +18,12 @@ class PasswordResetController extends Controller
     {
         $request->validate([
             'old_password' => 'required',
-            'new_password' => 'required|confirmed'
+            'new_password' => 'required|confirmed',
         ]);
 
         $authenticatedUser = auth()->user();
 
-        if(!Hash::check($request->get('old_password'), $authenticatedUser->password))
-        {
+        if (! Hash::check($request->get('old_password'), $authenticatedUser->password)) {
             return back()->with('error', 'Incorrect old password');
         }
 
