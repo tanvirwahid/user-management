@@ -35,6 +35,10 @@
                                     <div class="col">
                                         <input type="password" class="form-control form-control-sm" id="old_password"
                                             name="old_password" required>
+
+                                        @error('old_password')
+                                            <small class="text-danger mt-1">{{ $message }}</small>
+                                        @enderror
                                     </div>
                                 </div>
 
@@ -51,6 +55,9 @@
                                     <div class="col">
                                         <input type="password" class="form-control form-control-sm" id="new_password"
                                             name="new_password" required>
+                                        @error('new_password')
+                                            <small class="text-danger mt-1">{{ $message }}</small>
+                                        @enderror
                                     </div>
 
                                 </div>
