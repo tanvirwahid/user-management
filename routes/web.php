@@ -63,7 +63,7 @@ Route::group(
 
                 Route::group([
                     'middleware' => [
-                        'admin'
+                        'role:admin'
                     ],
                     'prefix' => '/admin',
                     'as' => 'admin.'
@@ -78,7 +78,7 @@ Route::group(
                         'prefix' => '/profile',
                         'as' => 'profile.',
                         'middleware' => [
-                            'user'
+                            'role:user'
                         ]
                     ],
                     function () {

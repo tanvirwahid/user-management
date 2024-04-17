@@ -13,7 +13,7 @@
                         </button>
                     </div>
                     <input class="form-control form-control-sm" placeholder="Search here...."
-                        aria-label="search" id="search" name="search" aria-describedby="search-button">
+                        aria-label="search" value="{{$search}}" id="search" name="search" aria-describedby="search-button">
                 </div>
 
             </form>
@@ -21,7 +21,7 @@
     </div>
 
     <div class="border-top">
-        <table class="table table-hover">
+        <table class="table table-hover table-sm table-bordered">
             <thead>
                 <tr>
                     <th scope="col">Name</th>

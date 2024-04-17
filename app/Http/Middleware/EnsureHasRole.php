@@ -2,23 +2,23 @@
 
 namespace App\Http\Middleware;
 
-use App\Http\Middleware\Traits\AdminCheckerTrait;
+use App\Http\Middleware\Traits\RoleCheckerTrait;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class AdminMiddleware
+class EnsureHasRole
 {
-    use AdminCheckerTrait;
+    use RoleCheckerTrait;
 
     /**
      * Handle an incoming request.
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next, string $role): Response
     {
-        if(!$this->isAdmin())
+        if(! $this->hasRole($role))
         {
             abort(403);
         }

@@ -7,6 +7,7 @@ namespace App\Models;
 use App\Contracts\Filterable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
@@ -81,9 +82,11 @@ class User extends Authenticatable implements Filterable
         $this->save();
     }
 
-    public function scopeNonAdmin(Builder $query)
+    public function scopeNormalUser(Builder $query)
     {
-        return $query->where('is_admin', 0);
+        return $query->whereHas('roles', function($query) {
+            $query->where('name', Role::ROLE_USER);
+        });
     }
 
     public function getNameAttribute(): string
@@ -103,10 +106,16 @@ class User extends Authenticatable implements Filterable
                 {
                     $columnToSearch = DB::raw("CONCAT(first_name, ' ', last_name)");
                 }
+
                 $query->orWhere($columnToSearch, 'like', '%'. $value . '%');
             }
 
         });
+    }
+
+    public function roles(): BelongsToMany
+    {
+        return $this->belongsToMany(Role::class);
     }
 
 }

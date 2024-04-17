@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
-
     public function __construct(private FileDownloaderInterface $fileDownloader)
     {
     }
@@ -21,7 +20,7 @@ class UserController extends Controller
 
         return view('users.show')
             ->with([
-                'users' => User::nonAdmin()->filter(
+                'users' => User::normalUser()->filter(
                     [
                         'name' => $search,
                         'address' => $search,

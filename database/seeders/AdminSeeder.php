@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Exceptions\AdminSeederException;
+use App\Models\Role;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -16,7 +17,7 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-        User::where('is_admin', 1)->delete();
+        User::truncate();
 
         $adminEmail = config('admin-credentials.email');
         $adminPassword = config('admin-credentials.password');
@@ -31,15 +32,16 @@ class AdminSeeder extends Seeder
             throw new AdminSeederException('Please, specify admin email and password in .env file. See readme for more info.');
         }
 
-        User::create([
+        $user = User::create([
             'first_name' => 'Admin',
             'last_name' => 'Local',
             'email' => config('admin-credentials.email'),
             'phone' => '+8801478284721',
             'password' => Hash::make(config('admin-credentials.password')),
-            'is_admin' => 1,
             'address' => 'admin address',
             'date_of_birth' => Carbon::parse('2000-01-01')
         ]);
+
+        $user->roles()->attach(Role::where('name', Role::ROLE_ADMIN)->first()->id);
     }
 }
