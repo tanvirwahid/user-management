@@ -36,7 +36,7 @@ class TwoFactorNotification extends Notification implements ShouldQueue
     {
         return (new MailMessage)
             ->from(config('mail.from.address'), config('mail.from.name'))
-            ->subject('Subject of your email')
+            ->subject('One Time Password (OTP)')
             ->view('emails.verification_template', ['code' => $notifiable->two_factor_code]);
     }
 

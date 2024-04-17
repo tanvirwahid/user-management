@@ -8,6 +8,4 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 interface FileHandlerInterface
 {
     public function getFileName(Request $request, string $fileColumn, string $location): string;
-    
-    public function download(string $fileName, string $location): BinaryFileResponse;
 }

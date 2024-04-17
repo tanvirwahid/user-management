@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\TwofaVerificationController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\PasswordResetController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -60,10 +61,25 @@ Route::group(
                 Route::post('/verify', [TwofaVerificationController::class, 'verify'])->name('verify.login');
                 Route::get('/verify/resend', [TwofaVerificationController::class, 'resend'])->name('verify.resend');
 
+                Route::group([
+                    'middleware' => [
+                        'admin'
+                    ],
+                    'prefix' => '/admin',
+                    'as' => 'admin.'
+                ], function() {
+                    Route::get('', [UserController::class, 'index'])->name('users');
+                    Route::get('/download/{user}', [UserController::class, 'downloadIdVerificationDocument'])
+                        ->name('download');
+                });
+
                 Route::group(
                     [
                         'prefix' => '/profile',
-                        'as' => 'profile.'
+                        'as' => 'profile.',
+                        'middleware' => [
+                            'user'
+                        ]
                     ],
                     function () {
                         Route::get('', [ProfileController::class, 'show'])->name('index');

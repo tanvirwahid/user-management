@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Middleware\Traits\AdminCheckerTrait;
 use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
@@ -10,6 +11,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class RedirectIfAuthenticated
 {
+    use AdminCheckerTrait;
+
     /**
      * Handle an incoming request.
      *
@@ -21,7 +24,10 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                return redirect(
+                    $this->isAdmin() ? 
+                    RouteServiceProvider::ADMIN_HOME : RouteServiceProvider::USER_HOME
+                );
             }
         }
 

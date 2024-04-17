@@ -73,7 +73,7 @@
                                     <div class="form-group col">
                                         <label for="phone">Phone</label>
                                         <input type="tel" class="form-control form-control-sm" id="phone"
-                                            name="phone" value="{{ old('phone') }}" required autofocus>
+                                            name="phone" value="{{ old('phone') }}" placeholder="+XXXXXXXXXXX" required autofocus>
                                         @error('phone')
                                             <small class="text-danger text-sm mt-1">{{ $message }}</small>
                                         @enderror

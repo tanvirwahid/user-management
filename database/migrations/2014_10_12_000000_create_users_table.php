@@ -20,7 +20,9 @@ return new class extends Migration
             $table->string('address');
             $table->date('date_of_birth');
             $table->string('password');
-            $table->string('id_verification_document_path');
+            $table->string('id_verification_document_path')
+                ->nullable()
+                ->default(null);
             $table->rememberToken();
             $table->timestamps();
         });

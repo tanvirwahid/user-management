@@ -3,12 +3,16 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Contracts\Filterable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements Filterable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -28,6 +32,10 @@ class User extends Authenticatable
         'id_verification_document_path',
         'email',
         'password',
+    ];
+
+    protected $appends = [
+        'name'
     ];
 
     /**
@@ -72,4 +80,33 @@ class User extends Authenticatable
         $this->two_factor_expires_at = null;
         $this->save();
     }
+
+    public function scopeNonAdmin(Builder $query)
+    {
+        return $query->where('is_admin', 0);
+    }
+
+    public function getNameAttribute(): string
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
+
+    public function scopeFilter(Builder $builder, array $parameters)
+    {
+        return $builder->where(function($query) use ($parameters) {
+            
+            foreach($parameters as $column => $value)
+            {
+                $columnToSearch = $column;
+
+                if($column == 'name')
+                {
+                    $columnToSearch = DB::raw("CONCAT(first_name, ' ', last_name)");
+                }
+                $query->orWhere($columnToSearch, 'like', '%'. $value . '%');
+            }
+
+        });
+    }
+
 }

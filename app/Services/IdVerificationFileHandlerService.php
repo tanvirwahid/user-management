@@ -2,12 +2,13 @@
 
 namespace App\Services;
 
+use App\Contracts\FileDownloaderInterface;
 use App\Contracts\FileHandlerInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
-class IdVerificationFileHandlerService implements FileHandlerInterface
+class IdVerificationFileHandlerService implements FileHandlerInterface, FileDownloaderInterface
 {
     public function getFileName(Request $request, string $fileColumn, string $location): string
     {

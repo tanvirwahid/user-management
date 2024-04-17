@@ -1,7 +1,14 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container d-flex justify-content-between">
         <div class="navbar-brand">
-            User Portal
+            @can('view-admin-portal')
+                Admin Portal
+            @endcan
+
+            @can('view-user-portal')
+                User Portal    
+            @endcan
+            
         </div>
         <div class="d-flex align-items-center">
             <div class="dropdown mx-3">

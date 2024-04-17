@@ -27,45 +27,50 @@
             <div class="col-md-6">
                 <img src="{{ asset('assets/images/user-icon.png') }}" alt="User Icon" class="user-icon d-block mx-auto">
                 <h4 class="text-center mt-2 mb-4">Login</h4>
-                    <div class="card ">
-                        <div class="card-body">
-                            @if (request()->has('success'))
-                                <div class="alert alert-success">
-                                    {{ request()->get('success') }}
-                                </div>
-                            @endif
-                            @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    {{ $errors->first('email') }}
-                                </div>
-                            @endif
+                <div class="card ">
+                    <div class="card-body">
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+                        @if (session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
 
-                            <form action="{{ route('login') }}" method="POST">
-                                @csrf
-                                <div class="form-group">
-                                    <label for="email">Email address</label>
-                                    <input type="email" class="form-control mt-1" id="email" name="email"
-                                        placeholder="Enter email">
-                                </div>
-                                <div class="form-group mt-3">
-                                    <label for="password">Password</label>
-                                    <input type="password" class="form-control" id="password" name="password"
-                                        placeholder="Password">
-                                </div>
-                                <div class="form-group d-flex justify-content-center mt-3">
-                                    <button type="submit" class="btn btn-dark btn-sm">Login</button>
-                                </div>
+                        @php
+                            Session::put('error', null);
+                            Session::put('success', null);
+                        @endphp
 
-                                <div class="form group mt-3">
-                                    <label>
-                                        Don't have an account? <a href="{{ route('registration.form') }}">Sign up</a>
-                                    </label>
+                        <form action="{{ route('login') }}" method="POST">
+                            @csrf
+                            <div class="form-group">
+                                <label for="email">Email address</label>
+                                <input type="email" class="form-control mt-1" id="email" name="email"
+                                    placeholder="Enter email">
+                            </div>
+                            <div class="form-group mt-3">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" id="password" name="password"
+                                    placeholder="Password">
+                            </div>
+                            <div class="form-group d-flex justify-content-center mt-3">
+                                <button type="submit" class="btn btn-dark btn-sm">Login</button>
+                            </div>
 
-                                </div>
+                            <div class="form group mt-3">
+                                <label>
+                                    Don't have an account? <a href="{{ route('registration.form') }}">Sign up</a>
+                                </label>
 
-                            </form>
-                        </div>
+                            </div>
+
+                        </form>
                     </div>
+                </div>
             </div>
         </div>
     </div>

@@ -40,7 +40,7 @@ class RegistrationController extends Controller
             'date_of_birth' => $request->get('date_of_birth'),
         ]);
 
-        return redirect(route('login.form', ['success' => 'User registered successfully.']));
+        return redirect(route('login.form'))->with('success', 'User registered successfully');
     }
 
     public function checkIfEmailExists(Request $request)

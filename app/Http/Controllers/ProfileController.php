@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\FileHandlerInterface;
+use App\Contracts\FileDownloaderInterface;
 use App\Models\User;
 
 class ProfileController extends Controller
 {
-    public function __construct(private FileHandlerInterface $fileHandler)
+    public function __construct(private FileDownloaderInterface $fileHandler)
     {
     }
 

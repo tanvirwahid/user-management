@@ -2,11 +2,14 @@
 
 namespace App\Providers;
 
-// use Illuminate\Support\Facades\Gate;
+use App\Http\Middleware\Traits\AdminCheckerTrait;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
 {
+    use AdminCheckerTrait;
+
     /**
      * The model to policy mappings for the application.
      *
@@ -23,6 +26,25 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('view-profile', function() {
+            return !$this->isAdmin();
+        });
+
+        Gate::define('reset-password-from-sidebar', function() {
+            return !$this->isAdmin();
+        });
+
+        Gate::define('view-users', function() {
+            return $this->isAdmin();
+        });
+
+        Gate::define('view-admin-portal', function() {
+            return $this->isAdmin();
+        });
+
+        Gate::define('view-user-portal', function() {
+            return !$this->isAdmin();
+        });
+
     }
 }

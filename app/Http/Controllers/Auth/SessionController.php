@@ -31,9 +31,7 @@ class SessionController extends Controller
             return redirect(route('verify.index'));
         }
 
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ]);
+        return back()->with('error', 'Credentials do not match our record');
 
     }
 
